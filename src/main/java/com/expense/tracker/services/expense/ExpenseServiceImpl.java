@@ -44,4 +44,22 @@ public class ExpenseServiceImpl implements ExpenseService{
             throw new EntityNotFoundException("No Expense was found for the given ID: " + id);
         }
     }
+
+    public Expenses updateExpense(Long id, ExpenseDTO expenseDTO){
+        Optional<Expenses> expense = expenseRepo.findById(id);
+        if(expense.isPresent()){
+            return saveOrUpdateExpense(expense.get(), expenseDTO);
+        }else{
+            throw new EntityNotFoundException("Could not find the expense");
+        }
+    }
+
+    public void deleteExpense(Long id){
+        Optional<Expenses> expense = expenseRepo.findById(id);
+        if(expense.isPresent()){
+            expenseRepo.deleteById(id);
+        }else{
+            throw new EntityNotFoundException("Could not find the expense");
+        }
+    }
 }

@@ -27,16 +27,39 @@ public class ExpenseController {
         }
     }
 
-    @GetMapping("/all")
+    @GetMapping("/getAll")
     public ResponseEntity<?> getAllExpenses(){
         return ResponseEntity.ok(expenseService.getAllExpenses());
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/getById/{id}")
     public ResponseEntity<?> getExpenseById(@PathVariable Long id){
         try{
             return ResponseEntity.ok(expenseService.getExpenseById(id));
         }catch(EntityNotFoundException enf){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(enf.getMessage());
+        }catch(Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<?> updateExpense(@PathVariable Long id, @RequestBody ExpenseDTO expenseDTO){
+        try{
+            return ResponseEntity.ok(expenseService.updateExpense(id, expenseDTO));
+        }catch(EntityNotFoundException enf) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(enf.getMessage());
+        }catch(Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> deleteExpense(@PathVariable Long id){
+        try{
+            expenseService.deleteExpense(id);
+            return ResponseEntity.ok(null);
+        }catch(EntityNotFoundException enf) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(enf.getMessage());
         }catch(Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());

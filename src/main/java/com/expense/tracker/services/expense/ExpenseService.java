@@ -12,4 +12,8 @@ public interface ExpenseService {
     List<Expenses> getAllExpenses();
 
     Expenses getExpenseById(Long id);
+
+    Expenses updateExpense(Long id, ExpenseDTO expenseDTO);
+
+    void deleteExpense(Long id);
 }
