@@ -1,6 +1,7 @@
 package com.expense.tracker.dto;
 
 import lombok.Data;
+import java.time.LocalDate;
 
 @Data
 public class ExpenseDTO {
@@ -9,6 +10,6 @@ public class ExpenseDTO {
     private String title;
     private String description;
     private String category;
-    private String data;
+    private LocalDate date;
     private Integer amount;
 }
