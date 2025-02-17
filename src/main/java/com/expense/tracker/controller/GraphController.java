@@ -5,6 +5,7 @@ import com.expense.tracker.services.graph.GraphService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,8 +17,14 @@ public class GraphController {
 
     private final GraphService graphService;
 
+    @GetMapping("/chart")
     public ResponseEntity<GraphDTO> getGraphData(){
         return ResponseEntity.ok(graphService.getGraphData());
+    }
+
+    @GetMapping
+    public ResponseEntity<?> getStatsData(){
+        return ResponseEntity.ok(graphService.getStatisticData());
     }
 }
 
