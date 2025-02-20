@@ -1,0 +1,72 @@
+<div>
+    <div nz-row>
+        <div nz-col nzFlex="2">
+            <nz-card nzType="inner" style="margin-top: 16px;" nzTitle="Post New Income">
+                <form nz-form [formGroup]="incomeForm" (ngSubmit)="submitForm()" class="custom-form">
+                    <nz-form-item>
+                        <nz-form-control nzErrorTip="Enter the title">
+                            <input type="text" nz-input formControlName="title" placeholder="Enter title"/>
+                        </nz-form-control>
+                    </nz-form-item>
+
+                    <nz-form-item>
+                        <nz-form-control nzErrorTip="Input the Amount">
+                            <input type="number" nz-input formControlName="amount" placeholder="Enter Amount"/>
+                        </nz-form-control>
+                    </nz-form-item>
+
+                    <nz-form-item>
+                        <nz-form-control nzErrorTip="Input the date">
+                            <nz-date-picker style="width: 100%;" formControlName="date"></nz-date-picker>
+                        </nz-form-control>
+                    </nz-form-item>
+
+                    <nz-form-item>
+                        <nz-form-control>
+                            <textarea nz-input placeholder="Enter Description" [nzAutosize]="{minRows: 2, maxRows: 6}" formControlName="description"></textarea>
+                        </nz-form-control>
+                    </nz-form-item>
+
+                    <nz-form-item>
+                        <nz-form-control nzErrorTip="Input the Category">
+                            <nz-select nzAllowClear nzPlaceHolder="Select a category" formControlName="category">
+                                <nz-option *ngFor="let category of listOfCategory" [nzLabel]="category" [nzValue]="category">
+                                    
+                                </nz-option>
+                            </nz-select>
+                        </nz-form-control>
+                    </nz-form-item>
+
+                    <button nz-button nzType="primary" nzBlock [disabled]="incomeForm.invalid" class="w-100">
+                        Post Expense
+                    </button>
+                </form>
+            </nz-card>
+        </div>
+
+
+        <div nz-col nzFlex="2" style="margin-left: 20px;">
+            <nz-card nzType="inner" style="margin-top: 16px;" nzTitle="Income History">
+                <div nz-card-grid style="width: 100%;" *ngFor="let i of income">
+                    <div nz-row>
+                        <div nz-col nzSpan="18">
+                            <span nz-icon nzType="message" nzTheme="outline"></span>{{i.title}}
+                            -
+                            <span nz-icon nzType="dollar" nzTheme="outline"></span>{{i.amount}}
+                            -
+                            <span nz-icon nzType="clock-circle" nzTheme="outline"></span>{{i.date}}
+                            -
+                            <span nz-icon nzType="comment" nzTheme="outline"></span>{{i.category}}
+                        </div>
+                        <div nz-col nzSpan="6" style="font-size: 15px;">
+                            <span nz-icon nzType="edit" nzTheme="fill" style="color: green;"
+                            routerLink="/income/{{i.id}}/edit">Edit</span>
+                            <span nz-icon nzType="delete" (click)="deleteIncome(i.id)" nzTheme="outline" style="color: red; margin-left: 10px;"
+                            >Delete</span>
+                        </div>
+                    </div>
+                </div>
+            </nz-card>
+        </div>        
+    </div>
+</div>

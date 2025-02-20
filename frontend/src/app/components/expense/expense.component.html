@@ -56,7 +56,6 @@
                         <nz-form-control nzErrorTip="Input the Category">
                             <nz-select nzAllowClear nzPlaceHolder="Select a category" formControlName="category">
                                 <nz-option *ngFor="let category of listOfCategory" [nzLabel]="category" [nzValue]="category">
-                                    
                                 </nz-option>
                             </nz-select>
                         </nz-form-control>
@@ -65,6 +64,7 @@
                     <button nz-button nzType="primary" nzBlock [disabled]="expenseForm.invalid" class="w-100">
                         Post Expense
                     </button>
+                    
                 </form>
             </nz-card>
         </div>
